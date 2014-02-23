@@ -65,10 +65,9 @@ public class Detector {
 	private void changeDVFS(int beginTime, Table table, HashMap<Cluster, Frequency> hm){
 		
 		//In order to decline the time cost of execution.
-		if(possibleSchedulingNum>=10){
+	/*	if(possibleSchedulingNum>=40){
 			return;
-		}
-	//	System.out.print('.');
+		}*/
 		
 		Table myTable = new Table();
 		myTable.copy(table);
@@ -76,6 +75,7 @@ public class Detector {
 		if(beginTime<Common.getTotalPeriod()){
 			//not reach LCM:
 			int nextPoint = getNextCheckPoint_exhaustive(beginTime, myTable);
+
 			Table _table = relax_exhaustive(beginTime, nextPoint, hm, myTable);
 			if(_table != null){
 				if(nextPoint+1>=Common.getTotalPeriod()){
@@ -94,20 +94,20 @@ public class Detector {
 			
 			}else{
 				//cannot relax: do nothing
-				//System.out.println("cannot relax  T.T");
+				System.out.println("cannot relax  T.T ThreadID: "+threadID);
 				//_table.display();
 				//System.out.println("-----------------------");
 			}
 		}else{
-			//System.out.println("My thread ID is: "+threadID);
-			//System.out.println("successfully relax  ^.^");
-			//myTable.display();
+			System.out.println("My thread ID is: "+threadID);
+			System.out.println("successfully relax  ^.^");
+			myTable.display();
 			//System.out.println("-----------------------");
 			//reach LCM (add into the scheduling list):
 			//System.out.println("##########################################################################");
 			Common.addIntoSchedulingSet(myTable.getSchedulingTable(), myTable.getFrequencyTable(), myTable.getEnergy(), QoS);
 			++possibleSchedulingNum;
-			//System.out.println("Current Size: "+Common.getSchedulingCounts());
+			System.out.println("Current Size: "+Common.getSchedulingCounts());
 			//Scanner scan = new Scanner(System.in);
 			//scan.next();
 			
@@ -1011,6 +1011,26 @@ public class Detector {
 	 */
 	private int getNextCheckPoint_exhaustive(int currentPoint, Table table){
 		Job[][]sTable = table.getSchedulingTable();
+
+		int previousJobID = -1, currentPointJobID = -1;
+		for(int timing=currentPoint+1;timing<Common.getTotalPeriod();++timing){
+			for(int core=0;core<sTable.length;++core){
+				if(sTable[core][timing]!=null){
+					previousJobID = sTable[core][timing].getJobID();
+				}else{
+					previousJobID = -1;
+				}
+				if(sTable[core][currentPoint]!=null){
+					currentPointJobID = sTable[core][currentPoint].getJobID();
+				}else{
+					currentPointJobID = -1;
+				}
+				if(previousJobID!=currentPointJobID){
+					return timing-1;
+				}
+			}
+		}
+/*
 		for(int timing=currentPoint+1;timing<Common.getTotalPeriod();++timing){
 			for(int core=0;core<sTable.length;++core){
 				if(sTable[core][timing]!=sTable[core][currentPoint]){
@@ -1018,6 +1038,7 @@ public class Detector {
 				}
 			}
 		}
+*/
 		return Common.getTotalPeriod()-1;
 	}
 	

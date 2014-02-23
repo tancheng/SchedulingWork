@@ -152,7 +152,7 @@ public class Common {
 					 * Here, we need modify the codes to multi-thread...
 					 * And note that the memory is shared~!!!!!!!!!!!!!!!!
 					 */
-				//	displayVersionCombination();
+					displayVersionCombination();
 					
 					
 					for(Job j: jobs_list){

@@ -191,10 +191,8 @@ public class Scheduling{
 			System.out.println();
 		}
 		*/
-		System.out.println("Scheduling solution (energy): "+energy);
-		System.out.println("Scheduling solution (QoS): "+QoS);
-		System.out.println("Scheduling solution (Rank): "+rank);
-		System.out.println("---------------------------------------------------");
+		System.out.print(QoS+"\t");
+		System.out.println(energy);
 	}
 	
 	public void fresh(Job[][] _jobTable, Frequency[][] _frequencyTable, double _energy, double _QoS){
@@ -235,12 +233,6 @@ public class Scheduling{
 		
 		newBorn = false;
 		available = true;
-		if(jT[3][3]!=null){
-			System.out.println("FRESH YOU: let's see job[3][3]: "+jT[3][3].getJobID());
-		}
-		else{
-			System.out.println("FRESH MEI: let's see job[3][3]: "+jT[3][3]);
-		}
 	}
 	
 	public void fresh(double _energy, double _QoS){
