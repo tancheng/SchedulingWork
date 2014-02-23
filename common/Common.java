@@ -1072,7 +1072,6 @@ class MultiThread extends Thread{
 		detector.reScheduleUnderConstraint_exhaustive(QoS);
 		//System.out.println("Thread "+ID+" start working...");
 		
-		//Common.showSchedulingSetSize();
 		
 		//}else{
 			//System.out.println("Exhaustive: Fail for this version combination.                :-( ");

@@ -158,7 +158,7 @@ public class Scheduling{
 	}
 	
 	public void show_withTables(){
-	/*	System.out.println("---------------------------------------------------");
+		/*System.out.println("---------------------------------------------------");
 		System.out.println("Scheduling solution (Job): ");
 		for(int i=0;i<jobTable.length;++i){
 			for(int j=0;j<jobTable[i].length;++j){
@@ -190,7 +190,7 @@ public class Scheduling{
 			}
 			System.out.println();
 		}
-		*/
+		*/	
 		System.out.print(QoS+"\t");
 		System.out.println(energy);
 	}

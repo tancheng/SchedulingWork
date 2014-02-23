@@ -16,16 +16,16 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub 
-		initClustersAndScheduler_small();
-		//initClustersAndScheduler_true();
+		//initClustersAndScheduler_small();
+		initClustersAndScheduler_true();
 		initTasks();
 		
 		long begin = System.currentTimeMillis();
 		
 		
 
-		//Common.scheduleTasks_heuristic();
-		Common.scheduleTasks_exhaustive();
+		Common.scheduleTasks_heuristic();
+		//Common.scheduleTasks_exhaustive();
 		
 		
 		long end = System.currentTimeMillis();
@@ -39,15 +39,37 @@ public class Test {
 	 */
 	static void initTasks(){
 		
-		//demo_1_small();
+		//demo_assumption_1t_1j_smallPlatform();
 		//demo_SPEC_small();
-		demo_x264_true();
+		//demo_x264_bodytrack_true();
+		//demo_bodytrack_true();
 		
+     		//demo_x264_bodytrack_4t_55j_true();
+
+     		demo_x264_bodytrack_12t_112j_true();
+
 	}
 	
 	
 	
-	static void demo_1_small(){
+	static void demo_assumption_1t_1j_smallPlatform(){
+		Cluster clu0 = Common.getCluster(0);
+		Cluster clu1 = Common.getCluster(1);
+		Task t;		
+
+		t = new Task(0,10);
+		t.setRunTimeOnCluster(clu0, 20);
+		t.setRunTimeOnCluster(clu1, 20);
+		t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+		t.addVersions(new Version(1,0.99,1.8,Common.getCluster(0)));
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+		t.addVersions(new Version(1,0.99,2,Common.getCluster(1)));
+		Common.loadTask(t);
+		
+		Common.loadJobs();
+	}
+	
+	static void demo_assumption_2t_7j_smallPlatform(){
 		Cluster clu0 = Common.getCluster(0);
 		Cluster clu1 = Common.getCluster(1);
 		Task t;		
@@ -55,18 +77,18 @@ public class Test {
 		t.setRunTimeOnCluster(clu0, 8);
 		t.setRunTimeOnCluster(clu1, 8);
 		t.addVersions(new Version(0,1,1,Common.getCluster(0)));
-		t.addVersions(new Version(1,0.8,1.6,Common.getCluster(0)));
+		t.addVersions(new Version(1,0.998,1.6,Common.getCluster(0)));
 		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
-		t.addVersions(new Version(1,0.8,2,Common.getCluster(1)));
+		t.addVersions(new Version(1,0.998,2,Common.getCluster(1)));
 		Common.loadTask(t);
 
 		t = new Task(1,10);
 		t.setRunTimeOnCluster(clu0, 20);
 		t.setRunTimeOnCluster(clu1, 20);
 		t.addVersions(new Version(0,1,1,Common.getCluster(0)));
-		t.addVersions(new Version(1,0.9,1.8,Common.getCluster(0)));
+		t.addVersions(new Version(1,0.99,1.8,Common.getCluster(0)));
 		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
-		t.addVersions(new Version(1,0.9,2,Common.getCluster(1)));
+		t.addVersions(new Version(1,0.99,2,Common.getCluster(1)));
 		Common.loadTask(t);
 		
 		Common.loadJobs();
@@ -98,8 +120,35 @@ public class Test {
         }
 
 
+     	static void demo_bodytrack_true(){
+                Cluster clu0 = Common.getCluster(0);
+                Cluster clu1 = Common.getCluster(1);
+                Task t;
 
-     	static void demo_x264_bodytrack_true(){
+                t = new Task(0,20);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.98693,3.735,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.98556,4.253,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9847,4.422,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.9983,1.0007,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.99634,2.789,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.98693,3.935,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.98556,5.253,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9847,5.422,Common.getCluster(1)));
+
+		Common.loadTask(t);
+       
+		Common.loadJobs();
+	}	
+
+
+     	static void demo_x264_bodytrack_2t_6j_true(){
                 Cluster clu0 = Common.getCluster(0);
                 Cluster clu1 = Common.getCluster(1);
                 Task t;
@@ -124,9 +173,9 @@ public class Test {
 
         
 
-                t = new Task(1,100);
-                t.setRunTimeOnCluster(clu0, 110);
-                t.setRunTimeOnCluster(clu1, 93.74);
+                t = new Task(1,20);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
                 t.addVersions(new Version(0,1,1,Common.getCluster(0)));
                 t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
                 t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
@@ -143,6 +192,342 @@ public class Test {
 
 		Common.loadTask(t);
        
+		Common.loadJobs();
+	}	
+
+
+     	static void demo_x264_bodytrack_4t_55j_true(){
+                Cluster clu0 = Common.getCluster(0);
+                Cluster clu1 = Common.getCluster(1);
+                Task t;
+                t = new Task(0,100);
+                t.setRunTimeOnCluster(clu0, 110);
+                t.setRunTimeOnCluster(clu1, 93.74);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.999,1.84,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.9898,3.1,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.9901,4.22,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9971,4.45,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.999,2,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.9898,4.1,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.9901,5.22,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9971,5.45,Common.getCluster(1)));
+
+		Common.loadTask(t);
+
+        
+
+                t = new Task(1,20);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.98693,3.735,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.98556,4.253,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9847,4.422,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.9983,1.0007,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.99634,2.789,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.98693,3.935,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.98556,5.253,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9847,5.422,Common.getCluster(1)));
+
+		Common.loadTask(t);
+      
+
+                t = new Task(2,150);
+                t.setRunTimeOnCluster(clu0, 110);
+                t.setRunTimeOnCluster(clu1, 93.74);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.999,1.84,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.9898,3.1,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.9901,4.22,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9971,4.45,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.999,2,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.9898,4.1,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.9901,5.22,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9971,5.45,Common.getCluster(1)));
+
+		Common.loadTask(t);
+        
+                t = new Task(3,40);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.98693,3.735,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.98556,4.253,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9847,4.422,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.9983,1.0007,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.99634,2.789,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.98693,3.935,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.98556,5.253,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9847,5.422,Common.getCluster(1)));
+
+		Common.loadTask(t);
+
+		Common.loadJobs();
+	}	
+
+
+     	static void demo_x264_bodytrack_12t_112j_true(){
+                Cluster clu0 = Common.getCluster(0);
+                Cluster clu1 = Common.getCluster(1);
+                Task t;
+                t = new Task(0,1000);
+                t.setRunTimeOnCluster(clu0, 110);
+                t.setRunTimeOnCluster(clu1, 93.74);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.999,1.84,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.9898,3.1,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.9901,4.22,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9971,4.45,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.999,2,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.9898,4.1,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.9901,5.22,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9971,5.45,Common.getCluster(1)));
+
+		Common.loadTask(t);
+
+        
+
+                t = new Task(1,200);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.98693,3.735,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.98556,4.253,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9847,4.422,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.9983,1.0007,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.99634,2.789,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.98693,3.935,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.98556,5.253,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9847,5.422,Common.getCluster(1)));
+
+		Common.loadTask(t);
+      
+
+                t = new Task(2,1500);
+                t.setRunTimeOnCluster(clu0, 110);
+                t.setRunTimeOnCluster(clu1, 93.74);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.999,1.84,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.9898,3.1,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.9901,4.22,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9971,4.45,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.999,2,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.9898,4.1,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.9901,5.22,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9971,5.45,Common.getCluster(1)));
+
+		Common.loadTask(t);
+        
+                t = new Task(3,400);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.98693,3.735,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.98556,4.253,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9847,4.422,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.9983,1.0007,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.99634,2.789,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.98693,3.935,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.98556,5.253,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9847,5.422,Common.getCluster(1)));
+
+		Common.loadTask(t);
+
+                t = new Task(4,1000);
+                t.setRunTimeOnCluster(clu0, 110);
+                t.setRunTimeOnCluster(clu1, 93.74);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.999,1.84,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.9898,3.1,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.9901,4.22,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9971,4.45,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.999,2,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.9898,4.1,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.9901,5.22,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9971,5.45,Common.getCluster(1)));
+
+		Common.loadTask(t);
+
+        
+
+                t = new Task(5,300);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.98693,3.735,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.98556,4.253,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9847,4.422,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.9983,1.0007,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.99634,2.789,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.98693,3.935,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.98556,5.253,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9847,5.422,Common.getCluster(1)));
+
+		Common.loadTask(t);
+      
+
+                t = new Task(6,2000);
+                t.setRunTimeOnCluster(clu0, 110);
+                t.setRunTimeOnCluster(clu1, 93.74);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.999,1.84,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.9898,3.1,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.9901,4.22,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9971,4.45,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.999,2,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.9898,4.1,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.9901,5.22,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9971,5.45,Common.getCluster(1)));
+
+		Common.loadTask(t);
+        
+                t = new Task(7,500);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.98693,3.735,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.98556,4.253,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9847,4.422,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.9983,1.0007,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.99634,2.789,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.98693,3.935,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.98556,5.253,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9847,5.422,Common.getCluster(1)));
+
+		Common.loadTask(t);
+
+
+
+                t = new Task(8,2000);
+                t.setRunTimeOnCluster(clu0, 110);
+                t.setRunTimeOnCluster(clu1, 93.74);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.999,1.84,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.9898,3.1,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.9901,4.22,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9971,4.45,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.999,2,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.9898,4.1,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.9901,5.22,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9971,5.45,Common.getCluster(1)));
+
+		Common.loadTask(t);
+
+        
+
+                t = new Task(9,3000);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.98693,3.735,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.98556,4.253,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9847,4.422,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.9983,1.0007,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.99634,2.789,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.98693,3.935,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.98556,5.253,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9847,5.422,Common.getCluster(1)));
+
+		Common.loadTask(t);
+      
+
+                t = new Task(10,6000);
+                t.setRunTimeOnCluster(clu0, 110);
+                t.setRunTimeOnCluster(clu1, 93.74);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.999,1.84,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.9898,3.1,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.9901,4.22,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9971,4.45,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.999,2,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.9919,2.45,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.9898,4.1,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.9901,5.22,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9971,5.45,Common.getCluster(1)));
+
+		Common.loadTask(t);
+        
+                t = new Task(11,600);
+                t.setRunTimeOnCluster(clu0, 18);
+                t.setRunTimeOnCluster(clu1, 13.49);
+                t.addVersions(new Version(0,1,1,Common.getCluster(0)));
+                t.addVersions(new Version(1,0.9983,1.0001,Common.getCluster(0)));
+                t.addVersions(new Version(2,0.99634,2.589,Common.getCluster(0)));
+                t.addVersions(new Version(3,0.98693,3.735,Common.getCluster(0)));
+                t.addVersions(new Version(4,0.98556,4.253,Common.getCluster(0)));
+                t.addVersions(new Version(5,0.9847,4.422,Common.getCluster(0)));
+
+		t.addVersions(new Version(0,1,1,Common.getCluster(1)));
+                t.addVersions(new Version(1,0.9983,1.0007,Common.getCluster(1)));
+                t.addVersions(new Version(2,0.99634,2.789,Common.getCluster(1)));
+                t.addVersions(new Version(3,0.98693,3.935,Common.getCluster(1)));
+                t.addVersions(new Version(4,0.98556,5.253,Common.getCluster(1)));
+                t.addVersions(new Version(5,0.9847,5.422,Common.getCluster(1)));
+
+		Common.loadTask(t);
+
+
+
 		Common.loadJobs();
 	}	
 

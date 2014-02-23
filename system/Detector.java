@@ -94,20 +94,20 @@ public class Detector {
 			
 			}else{
 				//cannot relax: do nothing
-				System.out.println("cannot relax  T.T ThreadID: "+threadID);
+			//	System.out.println("cannot relax  T.T ThreadID: "+threadID);
 				//_table.display();
 				//System.out.println("-----------------------");
 			}
 		}else{
-			System.out.println("My thread ID is: "+threadID);
-			System.out.println("successfully relax  ^.^");
-			myTable.display();
+			//System.out.println("My thread ID is: "+threadID);
+			//System.out.println("successfully relax  ^.^");
+			//myTable.display();
 			//System.out.println("-----------------------");
 			//reach LCM (add into the scheduling list):
 			//System.out.println("##########################################################################");
 			Common.addIntoSchedulingSet(myTable.getSchedulingTable(), myTable.getFrequencyTable(), myTable.getEnergy(), QoS);
 			++possibleSchedulingNum;
-			System.out.println("Current Size: "+Common.getSchedulingCounts());
+			//System.out.println("Current Size: "+Common.getSchedulingCounts());
 			//Scanner scan = new Scanner(System.in);
 			//scan.next();
 			
@@ -288,11 +288,13 @@ public class Detector {
 			
 		}
 		
-		showFrequencyTable();
-		showScheduleTable();
-		showPowerTable();
-		
-		System.out.println("energy: "+getEnergy());
+		//showFrequencyTable();
+		//showScheduleTable();
+		//showPowerTable();
+		freshPowerTable();		
+
+		System.out.println("QoS\tenergy ");
+		System.out.println(QoS+"\t"+getEnergy());
 		
 		
 	}
@@ -791,7 +793,8 @@ public class Detector {
 				interval = interval - newFrequency.getFrequency();
 				_table = insertIntervalOneByOne_exhaustive(toBeOccupiedJob, newFrequency, _table, newFrequency.getFrequency());
 				if(_table==null){	
-					
+
+System.out.println("fail??????????????????? in one by one 2");	
 					return null;
 				}
 				//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!for test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -962,9 +965,11 @@ public class Detector {
 	 * @return
 	 */
 	private int getNextAvailablePoint_exhaustive(Job job, Table table){
-		
+
+		int jobID = job.getJobID();
+
 		for(int i=job.getDeadline()-1;i>job.getIssueTime();--i){
-			if(table.getSchedulingTableValue(job.getCore().getCoreID(),i)!=null&&table.getSchedulingTableValue(job.getCore().getCoreID(),i)==job){
+			if(table.getSchedulingTableValue(job.getCore().getCoreID(),i)!=null&&table.getSchedulingTableValue(job.getCore().getCoreID(),i).getJobID()==jobID){
 				if(i==job.getDeadline()-1){
 					return -1;
 				}else{
@@ -979,6 +984,7 @@ public class Detector {
 					}
 				}
 				
+
 			}
 		}
 		return -1;
